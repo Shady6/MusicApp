@@ -3,22 +3,22 @@
 	margin-top: 10vh;
 }
 
-	.musicCard > div {
-		height: 100%;
-	}
+.musicCard>div {
+	height: 100%;
+}
 
 .albumCoverBackground {
 	width: 100%;
 	max-height: 100%;
 }
 
-.trackAbout > p:nth-of-type(odd) {
+.trackAbout>p:nth-of-type(odd) {
 	font-size: 1.5rem;
 	margin-bottom: 0rem;
 	color: rgb(147, 167, 220);
 }
 
-.trackAbout > p:nth-of-type(even) {
+.trackAbout>p:nth-of-type(even) {
 	margin-bottom: 2.3rem;
 }
 
@@ -28,51 +28,45 @@
 	font-size: 5rem;
 }
 
-	.like-controls > div {
-		position: relative;
-		height: 50%;
-		width: 100%;
-		border-radius: 15px;
-		transition: background .3s linear, color .2s linear, border .3s linear, font-size .3s cubic-bezier(0.43, 0.84, 0, 1.79);
-	}
+.like-controls>div {
+	position: relative;
+	height: 50%;
+	width: 100%;
+	border-radius: 15px;
+	transition: background .3s linear, color .2s linear, border .3s linear, font-size .2s ease-out;
+}
 
-		.like-controls > div:first-of-type {
-			border: 2px solid #71DC06;
-			margin-bottom: 0.3rem;
-			color: #71DC06;
-		}
+.like-controls>div:first-of-type {
+	border: 2px solid #71DC06;
+	margin-bottom: 0.3rem;
+	color: #71DC06;
+}
 
-		.like-controls > div:last-of-type {
-			margin-top: 0.3rem;
-			border: 2px solid #FF0000;
-			color: #FF0000;
-		}
+.like-controls>div:last-of-type {
+	margin-top: 0.3rem;
+	border: 2px solid #FF0000;
+	color: #FF0000;
+}
 
-		.like-controls > div:first-of-type:hover {
-			border: none;
-			background: #71dc06;
-			color: #DBEEC7;
-			font-size: 1.1em;
-			cursor: pointer;
-		}
+.like-controls>div:first-of-type:hover {
+	background: #71dc06;
+}
 
-		.like-controls > div:last-of-type:hover {
-			border: none;
-			background: #FF0000;
-			color: #DBEEC7;
-			font-size: 1.1em;
-			cursor: pointer;
-		}
+.like-controls>div:last-of-type:hover {
+	background: #FF0000;
 
-	.like-controls i {
-		position: absolute;
-		top: calc(50% - 2.5rem);
-		left: calc(50% - 2.5rem);
-	}
+}
 
+.like-controls>div:hover {
+	transition: font-size .2s cubic-bezier(0.43, 0.84, 0, 1.79);
+	border: none;
+	color: #DBEEC7;
+	font-size: 1.1em;
+	cursor: pointer;
+}
 
-
-
-
-
-	
+.like-controls i {
+	position: absolute;
+	top: calc(50% - 2.5rem);
+	left: calc(50% - 2.5rem);
+}

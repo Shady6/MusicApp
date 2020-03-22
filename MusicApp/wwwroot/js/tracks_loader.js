@@ -1,22 +1,18 @@
-﻿let tracks = null;
-let trackLoadingIndex = 0;
-
-const loadTracksInfo = (count) => {
+﻿const loadTracksInfo = (count) => {
 	return new Promise((resolve, reject) => {
 		$.ajax({
 			url: `https://localhost:44325/api/music/${count}`
 		}).then((data) => {
-			if (data.length == 1)
-				resolve(data[0]);
+			if (data.length >= 1) {
+				resolve(data);
+			}
 		}).catch(err => { console.log(err) });
 	});
 }
 
 
-const setImageDownloadingListeners = (downloadingImage, track) =>
-{
-	downloadingImage.onabort = function ()
-	{
+const setImageDownloadingListeners = (downloadingImage, track) => {
+	downloadingImage.onabort = function () {
 		track.album.imageLoadedMessage = "Couldn't load the image.";
 	}
 	downloadingImage.onerror = function () {
@@ -54,17 +50,18 @@ const loadAudio = (track) => {
 	downloadingAudio.controls = true;
 }
 
-async function getTracks(count)
-{
-	tracks = await loadTracksInfo(count);
+async function getTracks(count) {
+	let tracks = await loadTracksInfo(count);
 
-	tracks.each((track, i) =>
-	{
+	tracks.forEach((track, i) => {
 		loadBackgroundImage(track);
 		loadAudio(track);
 	});
+
+	return tracks;
 }
 
+export default getTracks;
 
 
 

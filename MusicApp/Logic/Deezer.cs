@@ -24,7 +24,7 @@ namespace MusicApp.Logic
 
 			for (int i = 0; i < tracks.Length; i++)
 			{
-				while (tracks[i].Preview == null)
+				while (tracks[i].Preview == null || tracks[i].Preview == "")
 					tracks[i] = await HttpGetter.GetAsync<Track>(trackUri + "/" + rnd.Next(minVal, maxVal));
 			}
 
