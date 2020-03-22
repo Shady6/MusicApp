@@ -1,0 +1,17 @@
+﻿/*#loadingScreen {
+	height: 100%;
+	background: black;
+	font-size: 3rem;
+	color: white;
+	letter-spacing: 1rem;
+	text-align: center;
+	width: 100%;
+}
+
+#loadingScreenTitle {
+	margin-top: 15%;
+}*/
+
+.alignAtCenter {
+	margin-top: 25vh;
+}

@@ -1,0 +1,60 @@
+﻿@section Styles
+{
+	<link rel="stylesheet" href="~/css/cards.css" />
+	<link rel="stylesheet" href="~/css/loadingSpinner.css" />
+	<link rel="stylesheet" href="~/css/loadingScreen.css" />
+}
+
+@section Scripts
+{
+	<script src="~/js/audio_player.js"></script>
+	<script src="~/js/cards.js"></script>
+	<script src="~/js/like_controls.js"></script>
+}
+
+<div class="container-fluid">
+	<div id="loadingScreen" class="row text-center align-content-center">
+		<div class="col-12 alignAtCenter">
+			<h1 id="loadingScreenTitle" class="text-white display-1">MusicApp</h1>
+			<div class="lds-ellipsis">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container music-card-container" style="display: none;">
+		<div class="musicCard row text-white">
+			<div class="col-4 trackAbout d-flex flex-column justify-content-between">
+				<p>Author</p>
+				<p class="trackAuthor"></p>
+				<p>Title</p>
+				<p class="trackTitle"></p>
+				<p>Album</p>
+				<p class="albumTitle"></p>
+				<input class="trackAudioSource" type="hidden" />
+				<div class="audioControls">
+					@*<audio controls preload="auto">Your browser doesn't support audio</audio>*@
+				</div>
+			</div>
+
+			<div class="album col-6 p-0">
+				<input class="AlbumCover" type="hidden" />
+				@*<img class="albumCoverBackground img-fluid"></img>*@
+			</div> 
+
+			<div class="col-2 text-center d-flex flex-column like-controls">
+				<div>
+					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+				</div>
+				<div>
+					<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
