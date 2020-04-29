@@ -1,4 +1,4 @@
-﻿const destroyLoadingScreen = () => {
+﻿export const disposeMainLoadingScreen = () => {
 	$("#loadingScreenTitle").fadeOut(500);
 	$(".lds-ellipsis").fadeOut(500);
 	$("#loadingScreen").slideUp({
@@ -7,4 +7,4 @@
 	});
 }
 
-export default destroyLoadingScreen;
+

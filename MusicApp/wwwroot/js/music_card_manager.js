@@ -1,31 +1,59 @@
 ﻿import getTracks from "./tracks_loader.js";
 import createMusicCard from "./DOM_music_card_creator.js";
-import destroyLoadingScreen from "./loading_screen_handler.js";
+import { disposeMainLoadingScreen } from "./loading_screen_handler.js";
+import { setLoadingOnLikeControl } from "./like_controls.js";
 
 let maxTracksCount = 8;
 let tracks = [];
 let displayedTrackIndex = -1;
 let firstBuffering = true;
+let leftHalfOfTracksLoaded = false;
+let rightHalfOfTracksLoaded = false;
+let waitingForNextTrack = false;
+let trackBufferEvent;
 
 $(document).ready(() => {
+
+    initializeTrackBufferEvent();
     createInitialMusicCard();
+    disposeMainLoadingScreen();
+    loadTracksToBuffer();
 });
 
-// TODO in DOM_music_card_creator add functions to insert image and audio elements into HTML
-
-const createNextMusicCard = () =>
-{
-    displayedTrackIndex++;
-    createMusicCard(tracks[displayedTrackIndex]);
-    loadTracksToBuffer();
+const initializeTrackBufferEvent = () => {
+    trackBufferEvent = new Event("trackLoaded");
+    window.addEventListener("trackLoaded", () => {
+        if (waitingForNextTrack) {
+            waitingForNextTrack = false;
+            createNextMusicCard();
+        }
+    });
 }
 
-async function createInitialMusicCard(){
+const createNextMusicCard = () => {
+    console.log('hello');
+    if (!((displayedTrackIndex == maxTracksCount - 1 && !leftHalfOfTracksLoaded) ||
+        (displayedTrackIndex == maxTracksCount / 2 - 1 && !rightHalfOfTracksLoaded) ||
+        (!leftHalfOfTracksLoaded && !rightHalfOfTracksLoaded))) {
+
+        if (displayedTrackIndex == maxTracksCount - 1)
+            displayedTrackIndex = -1;
+        displayedTrackIndex++;
+        createMusicCard(tracks[displayedTrackIndex]);
+        loadTracksToBuffer();
+    }
+    else {
+        if (!waitingForNextTrack)
+            setLoadingOnLikeControl();
+
+        waitingForNextTrack = true;
+    }
+}
+
+async function createInitialMusicCard() {
     displayedTrackIndex++;
-    await loadInitialTrack();    
+    await loadInitialTrack();
     createMusicCard(tracks[displayedTrackIndex]);
-    destroyLoadingScreen();
-    await loadTracksToBuffer();
 }
 
 async function loadInitialTrack() {
@@ -34,22 +62,34 @@ async function loadInitialTrack() {
 }
 
 async function loadTracksToBuffer() {
-    if (firstBuffering){
+
+    if (firstBuffering) {
         let loadedTracks = await getTracks(maxTracksCount - 1);
-        tracks.push(...loadedTracks);1
-        console.log(loadedTracks);
+        tracks.push(...loadedTracks);
+        leftHalfOfTracksLoaded = true;
+        rightHalfOfTracksLoaded = true;
         firstBuffering = false;
     }
-    else if (displayedTrackIndex == maxTracksCount / 2){
+    else if (displayedTrackIndex == maxTracksCount / 2) {
         let loadedTracks = await getTracks(maxTracksCount / 2);
-        for (let i = 0; i < loadedTracks.length; i++) 
-            tracks[i] = loadedTracks[i];        
+        for (let i = 0; i < loadedTracks.length; i++)
+            tracks[i] = loadedTracks[i];
+        leftHalfOfTracksLoaded = true;
+        rightHalfOfTracksLoaded = false;
     }
-    else if (displayedTrackIndex == maxTracksCount - 1){
+    else if (displayedTrackIndex == maxTracksCount - 1) {
         let loadedTracks = await getTracks(maxTracksCount / 2);
-        for (let i = 0; i < loadedTracks.length; i++) 
-            tracks[i + maxTracksCount / 2] = loadedTracks[i];        
+        for (let i = 0; i < loadedTracks.length; i++)
+            tracks[i + maxTracksCount / 2] = loadedTracks[i];
+        leftHalfOfTracksLoaded = false;
+        rightHalfOfTracksLoaded = true;
     }
+
+    window.dispatchEvent(trackBufferEvent);
 }
+
+
+export default createNextMusicCard;
+
 
 

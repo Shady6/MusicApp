@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "MusicApp\\wwwroot"
+		},
+		{
+			"path": "MusicApp\\Views"
+		}
+	],
+	"settings": {}
+}
