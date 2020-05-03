@@ -4,7 +4,13 @@ import {emptyMusicCard} from './DOM_music_card_creator.js';
 
 $(document).ready(() =>
 {
-	$(".fa-thumbs-up").on("click",
+	$("#thumbsUpBtn").on("click",
+		() =>
+		{
+				createNextMusicCard();
+		});
+
+		$("#thumbsDownBtn").on("click",
 		() =>
 		{
 				createNextMusicCard();
