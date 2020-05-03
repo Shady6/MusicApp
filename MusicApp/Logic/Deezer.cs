@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using MusicApp.Models;
+using MusicApp.Data.Models;
 
 namespace MusicApp.Logic
 {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
-namespace MusicApp.Models
+namespace MusicApp.Data.Models
 {
-	public class Artist
+	public class User : IdentityUser
 	{
-		public string Name { get; set; }
 	}
 }

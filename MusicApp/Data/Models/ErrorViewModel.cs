@@ -1,6 +1,4 @@
-using System;
-
-namespace MusicApp.Models
+namespace MusicApp.Data.Models
 {
 	public class ErrorViewModel
 	{

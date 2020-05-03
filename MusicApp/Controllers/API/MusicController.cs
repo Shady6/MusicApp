@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MusicApp.Data.Models;
 using MusicApp.Logic;
-using MusicApp.Models;
 using Newtonsoft.Json;
 
 namespace MusicApp.Controllers.API

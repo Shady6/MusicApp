@@ -2,12 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MusicApp.Data;
+using MusicApp.Data.Models;
 
 namespace MusicApp
 {
@@ -23,6 +29,18 @@ namespace MusicApp
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddDbContext<ApplicationDbContext>(options =>
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+			services.AddIdentity<User, IdentityRole>(options =>
+				{
+					options.Password.RequiredLength = 8;
+					options.User.RequireUniqueEmail = true;
+				})
+				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			services.AddAutoMapper(typeof(Startup));
+
 			services.AddControllersWithViews()
 				.AddRazorRuntimeCompilation()
 				.AddNewtonsoftJson();
@@ -45,6 +63,8 @@ namespace MusicApp
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
 
 			app.UseAuthorization();
 
