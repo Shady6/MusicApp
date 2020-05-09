@@ -23,5 +23,10 @@ namespace MusicApp.Data
 
 			modelBuilder.ApplyConfiguration(new RoleConfiguration());
 		}
+
+		public DbSet<TrackUser> TrackUsers { get; set; }
+		public DbSet<Track> Tracks { get; set; }
+		public DbSet<Album> Albums { get; set; }
+		public DbSet<Artist> Artists { get; set; }
 	}
 }

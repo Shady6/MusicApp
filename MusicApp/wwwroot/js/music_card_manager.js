@@ -31,7 +31,6 @@ const initializeTrackBufferEvent = () => {
 }
 
 const createNextMusicCard = () => {
-    console.log('hello');
     if (!((displayedTrackIndex == maxTracksCount - 1 && !leftHalfOfTracksLoaded) ||
         (displayedTrackIndex == maxTracksCount / 2 - 1 && !rightHalfOfTracksLoaded) ||
         (!leftHalfOfTracksLoaded && !rightHalfOfTracksLoaded))) {

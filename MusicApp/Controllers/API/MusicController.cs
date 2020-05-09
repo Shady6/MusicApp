@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MusicApp.Data.Dto.Models;
 using MusicApp.Data.Models;
 using MusicApp.Logic;
 using Newtonsoft.Json;
@@ -18,10 +19,10 @@ namespace MusicApp.Controllers.API
 	    // GET: api/Music
         [HttpGet("{tracksToLoadAtOneTime:int}")]
         [Produces("application/json")]
-        public async Task<IEnumerable<Track>> Get(int tracksToLoadAtOneTime)
+        public async Task<IEnumerable<TrackDto>> Get(int tracksToLoadAtOneTime)
         {
-	        Track[] tracks = await Deezer.GetRandomTracksWrapperAsync(tracksToLoadAtOneTime);
-	        return tracks;
+	        TrackDto[] tracksDto = await Deezer.GetRandomTracksWrapperAsync(tracksToLoadAtOneTime);
+	        return tracksDto;
         }
     }
 }

@@ -1,23 +1,15 @@
-﻿namespace MusicApp.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MusicApp.Data.Models
 {
 	public class Track
 	{
+		[Key]
+		public int Id { get; set; }
 		public string Title { get; set; }
 		public int Duration { get; set; }
 		public Artist Artist { get; set; }
 		public string Preview { get; set; }
 		public Album Album { get; set; }
-
-		public override string ToString()
-		{
-			return $"{Title} by {Artist.Name} Duration {Duration}";
-		}
-
-		//public override bool Equals(object obj)
-		//{
-		//	Track other = (Track) obj;
-		//	return other.Title == Title && other.Duration == Duration && other.Artist == Artist;
-		//}
-
 	}
 }

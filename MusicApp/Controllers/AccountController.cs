@@ -52,7 +52,7 @@ namespace MusicApp.Controllers
 
 		    await _userManager.AddToRoleAsync(user, "application_user");
 
-		    await SignInTheUserAsync(user);
+		    await _signInManager.SignInAsync(user, false);
 
 		    return RedirectToAction("Index", "Home");
 	    }
@@ -83,7 +83,7 @@ namespace MusicApp.Controllers
 		    }
 	    }
 
-	    [HttpGet]
+	    [HttpPost]
 		[ValidateAntiForgeryToken]
 	    public async Task<IActionResult> Logout()
 	    {

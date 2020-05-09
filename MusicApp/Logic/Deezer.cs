@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using MusicApp.Data.Dto.Models;
 using MusicApp.Data.Models;
 
 namespace MusicApp.Logic
@@ -18,25 +19,25 @@ namespace MusicApp.Logic
 		private static readonly int maxVal = 99999999;
 
 		// this wrappers is needed because with GetRandomTracksAsync you dont always get full list of tracks, some may be null
-		public static async Task<Track[]> GetRandomTracksWrapperAsync(int tracksCount)
+		public static async Task<TrackDto[]> GetRandomTracksWrapperAsync(int tracksCount)
 		{
-			Track[] tracks = await GetRandomTracksAsync(tracksCount);
+			TrackDto[] tracksDto = await GetRandomTracksAsync(tracksCount);
 
-			for (int i = 0; i < tracks.Length; i++)
+			for (int i = 0; i < tracksDto.Length; i++)
 			{
-				while (tracks[i].Preview == null || tracks[i].Preview == "")
-					tracks[i] = await HttpGetter.GetAsync<Track>(trackUri + "/" + rnd.Next(minVal, maxVal));
+				while (String.IsNullOrEmpty(tracksDto[i].Preview))
+					tracksDto[i] = await HttpGetter.GetAsync<TrackDto>(trackUri + "/" + rnd.Next(minVal, maxVal));
 			}
 
-			return tracks;
+			return tracksDto;
 		}
-		public static async Task<Track[]> GetRandomTracksAsync(int tracksCount)
+		public static async Task<TrackDto[]> GetRandomTracksAsync(int tracksCount)
 		{
 			
-			List<Task<Track>> tracks = new List<Task<Track>>();
+			List<Task<TrackDto>> tracks = new List<Task<TrackDto>>();
 
 			for (int i = 0; i < tracksCount; i++)
-				tracks.Add(HttpGetter.GetAsync<Track>(trackUri + "/" + rnd.Next(minVal, maxVal)));
+				tracks.Add(HttpGetter.GetAsync<TrackDto>(trackUri + "/" + rnd.Next(minVal, maxVal)));
 			
 			return await Task.WhenAll(tracks);
 		}
