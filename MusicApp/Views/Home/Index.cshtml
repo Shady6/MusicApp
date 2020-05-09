@@ -27,9 +27,6 @@
 	<div class="container music-card-container" style="display: none;">
 		<div class="musicCard row text-white">
 			<div class="col-4 trackAbout d-flex flex-column justify-content-between">
-				@foreach(var claim in User.Claims){
-					<p>@claim.Type : @claim.Value</p>
-				}
 				<p>Author</p>
 				<p class="trackAuthor"></p>
 				<p>Title</p>

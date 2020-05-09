@@ -16,11 +16,13 @@ namespace MusicApp.Controllers
 	{
 		private readonly IMapper _mapper;
 		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
 
-		public AccountController(IMapper mapper, UserManager<User> userManager)
+		public AccountController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
 		{
 			_mapper = mapper;
 			_userManager = userManager;
+			_signInManager = signInManager;
 		}
 
 		[HttpGet]
@@ -68,13 +70,12 @@ namespace MusicApp.Controllers
 		    if (!ModelState.IsValid)
 			    return View(userModel);
 
-		    var user = await _userManager.FindByEmailAsync(userModel.Email);
-		    if (user != null &&
-		        await _userManager.CheckPasswordAsync(user, userModel.Password))
-		    {
-				await SignInTheUserAsync(user);
-				return RedirectToAction("Index", "Home");
-			}
+		    var result =
+			    await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe,
+				    false);
+		    if (result.Succeeded)
+			    return RedirectToAction("Index", "Home");
+			
 		    else
 		    {
 			    ModelState.AddModelError("", "Invalid Email or password.");
@@ -82,13 +83,13 @@ namespace MusicApp.Controllers
 		    }
 	    }
 
-	    private async Task SignInTheUserAsync(User user)
+	    [HttpGet]
+		[ValidateAntiForgeryToken]
+	    public async Task<IActionResult> Logout()
 	    {
-		    var identity = new ClaimsIdentity(IdentityConstants.ApplicationScheme);
-		    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-		    identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+		    await _signInManager.SignOutAsync();
 
-		    await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(identity));
+		    return RedirectToAction("Index", "Home");
 	    }
-    }
+	}
 }
