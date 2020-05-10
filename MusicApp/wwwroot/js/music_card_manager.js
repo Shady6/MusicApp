@@ -20,6 +20,10 @@ $(document).ready(() => {
     loadTracksToBuffer();
 });
 
+export const getDisplayedTrackJson = () => {
+    return tracks[displayedTrackIndex];
+}
+
 const initializeTrackBufferEvent = () => {
     trackBufferEvent = new Event("trackLoaded");
     window.addEventListener("trackLoaded", () => {
@@ -31,12 +35,11 @@ const initializeTrackBufferEvent = () => {
 }
 
 const createNextMusicCard = () => {
-    if (!((displayedTrackIndex == maxTracksCount - 1 && !leftHalfOfTracksLoaded) ||
-        (displayedTrackIndex == maxTracksCount / 2 - 1 && !rightHalfOfTracksLoaded) ||
-        (!leftHalfOfTracksLoaded && !rightHalfOfTracksLoaded))) {
+    if (canDisplayNextCard()) {
 
         if (displayedTrackIndex == maxTracksCount - 1)
             displayedTrackIndex = -1;
+
         displayedTrackIndex++;
         createMusicCard(tracks[displayedTrackIndex]);
         loadTracksToBuffer();
@@ -47,6 +50,12 @@ const createNextMusicCard = () => {
 
         waitingForNextTrack = true;
     }
+}
+
+function canDisplayNextCard() {
+    return !((displayedTrackIndex == maxTracksCount - 1 && !leftHalfOfTracksLoaded) ||
+        (displayedTrackIndex == maxTracksCount / 2 - 1 && !rightHalfOfTracksLoaded) ||
+        (!leftHalfOfTracksLoaded && !rightHalfOfTracksLoaded));
 }
 
 async function createInitialMusicCard() {
@@ -62,33 +71,42 @@ async function loadInitialTrack() {
 
 async function loadTracksToBuffer() {
 
-    if (firstBuffering) {
-        let loadedTracks = await getTracks(maxTracksCount - 1);
-        tracks.push(...loadedTracks);
-        leftHalfOfTracksLoaded = true;
-        rightHalfOfTracksLoaded = true;
-        firstBuffering = false;
-    }
-    else if (displayedTrackIndex == maxTracksCount / 2) {
-        let loadedTracks = await getTracks(maxTracksCount / 2);
-        for (let i = 0; i < loadedTracks.length; i++)
-            tracks[i] = loadedTracks[i];
-        leftHalfOfTracksLoaded = true;
-        rightHalfOfTracksLoaded = false;
-    }
-    else if (displayedTrackIndex == maxTracksCount - 1) {
-        let loadedTracks = await getTracks(maxTracksCount / 2);
-        for (let i = 0; i < loadedTracks.length; i++)
-            tracks[i + maxTracksCount / 2] = loadedTracks[i];
-        leftHalfOfTracksLoaded = false;
-        rightHalfOfTracksLoaded = true;
-    }
+    if (firstBuffering) 
+        await loadFullBufffer();
+
+    else if (displayedTrackIndex == maxTracksCount / 2) 
+        await loadLeftHalfOfBuffer();
+    
+    else if (displayedTrackIndex == maxTracksCount - 1) 
+        await loadRightHalfOfBuffer();
+    
 
     window.dispatchEvent(trackBufferEvent);
 }
 
 
+async function loadRightHalfOfBuffer() {
+    let loadedTracks = await getTracks(maxTracksCount / 2);
+    for (let i = 0; i < loadedTracks.length; i++)
+        tracks[i + maxTracksCount / 2] = loadedTracks[i];
+    leftHalfOfTracksLoaded = false;
+    rightHalfOfTracksLoaded = true;
+}
+
+async function loadLeftHalfOfBuffer() {
+    let loadedTracks = await getTracks(maxTracksCount / 2);
+    for (let i = 0; i < loadedTracks.length; i++)
+        tracks[i] = loadedTracks[i];
+    leftHalfOfTracksLoaded = true;
+    rightHalfOfTracksLoaded = false;
+}
+
+async function loadFullBufffer() {
+    let loadedTracks = await getTracks(maxTracksCount - 1);
+    tracks.push(...loadedTracks);
+    leftHalfOfTracksLoaded = true;
+    rightHalfOfTracksLoaded = true;
+    firstBuffering = false;
+}
+
 export default createNextMusicCard;
-
-
-

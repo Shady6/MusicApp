@@ -14,9 +14,9 @@ namespace MusicApp.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MusicController : ControllerBase
+    public class DeezerController : ControllerBase
     {
-	    // GET: api/Music
+	    // GET: api/Deezer
         [HttpGet("{tracksToLoadAtOneTime:int}")]
         [Produces("application/json")]
         public async Task<IEnumerable<TrackDto>> Get(int tracksToLoadAtOneTime)

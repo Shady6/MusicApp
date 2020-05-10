@@ -27,7 +27,7 @@ namespace MusicApp.Controllers.API
 	    }
 
 	    [HttpPost]
-	    public async Task<int> AddTrack([FromBody] TrackDto trackDto)
+	    public async Task<int> AddTrack([FromForm] TrackDto trackDto)
 	    {
 		    Track track = _mapper.Map<Track>(trackDto);
 		    User currentUser = await _userManager.GetUserAsync(User);

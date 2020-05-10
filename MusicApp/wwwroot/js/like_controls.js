@@ -1,5 +1,6 @@
-﻿import createNextMusicCard from './music_card_manager.js';
+﻿import createNextMusicCard, {getDisplayedTrackJson} from './music_card_manager.js';
 import {emptyMusicCard} from './DOM_music_card_creator.js';
+import {convertToTrackDto} from './track_data_processor.js';
 
 
 $(document).ready(() =>
@@ -7,6 +8,20 @@ $(document).ready(() =>
 	$("#thumbsUpBtn").on("click",
 		() =>
 		{
+			// TODO check how to send properly data to api controller
+				let trackDto = convertToTrackDto(getDisplayedTrackJson());
+				let data = JSON.stringify({Body: trackDto});
+				console.log(data);
+				$.ajax({
+					headers: { 
+						'Accept': 'application/json',
+						'Content-Type': 'application/json' 
+					},
+					url: `https://localhost:44325/api/track`,
+					method: "POST",
+					dataType: 'json',
+					data: JSON.stringify({trackDto})	
+				});
 				createNextMusicCard();
 		});
 
