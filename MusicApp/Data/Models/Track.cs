@@ -11,5 +11,6 @@ namespace MusicApp.Data.Models
 		public Artist Artist { get; set; }
 		public string Preview { get; set; }
 		public Album Album { get; set; }
+		public User User { get; set; }
 	}
 }

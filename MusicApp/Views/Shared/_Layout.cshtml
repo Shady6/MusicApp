@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
 					<ul class="navbar-nav w-100 flex-row">
 
 						<li class="nav-item mr-auto">
-							<a class="nav-link text-light" asp-controller="" asp-action="">My tracks</a>
+							<a class="nav-link text-light" asp-controller="Track" asp-action="Index">My tracks</a>
 						</li>
 						@{Claim roleClaim = User.Claims.Where(claim => claim.Type == ClaimTypes.Role).FirstOrDefault();}
 						@if (roleClaim != null && roleClaim.Value == "Application User")
@@ -33,7 +34,10 @@
 								<a class="nav-link text-light" asp-controller="" asp-action="">@User.Identity.Name</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>
+								<form class="form-inline" asp-controller="Account" asp-action="Logout">
+									<button type="submit" class="nav-link btn btn-link text-light">Logout</button>
+								</form>
+								@*<a class="nav-link text-light" asp-controller="Account" asp-action="Logout">Logout</a>*@
 							</li>
 						}
 						else

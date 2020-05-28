@@ -15,8 +15,6 @@ using Microsoft.Extensions.Hosting;
 using MusicApp.Data;
 using MusicApp.Data.Models;
 using MusicApp.Mappings;
-using MusicApp.Repository;
-using MusicApp.Repository.IRepository;
 
 namespace MusicApp
 {
@@ -43,8 +41,6 @@ namespace MusicApp
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
 			services.AddAutoMapper(typeof(Startup), typeof(MusicAppMappings));
-
-			services.AddScoped<ITrackUserRepository, TrackUserRepository>();
 
 			services.AddControllersWithViews()
 				.AddRazorRuntimeCompilation()

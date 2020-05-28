@@ -1,7 +1,21 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@using MusicApp.Data.Models
 
-<h1>Index</h1>
-
+<div class="container-fluid p-0" id="tracks-wrapper">
+	@{
+		if (ViewBag.FavoriteTracks.Count == 0)
+		{
+			<h3>Like a song on home page to see it here.</h3>
+		}
+		else
+		{
+			<div class="row no-gutters">
+				@foreach (Track track in ViewBag.FavoriteTracks)
+				{
+				<div class="track-square col-3">
+					<img class="img-fluid" src="@track.Album.Cover_Big" />
+				</div>
+				}
+			</div>
+		}
+	}
+</div>

@@ -19,7 +19,7 @@ namespace MusicApp.Controllers.API
 	    // GET: api/Deezer
         [HttpGet("{tracksToLoadAtOneTime:int}")]
         [Produces("application/json")]
-        public async Task<IEnumerable<TrackDto>> Get(int tracksToLoadAtOneTime)
+        public async Task<IEnumerable<TrackDto>> GetTracks(int tracksToLoadAtOneTime)
         {
 	        TrackDto[] tracksDto = await Deezer.GetRandomTracksWrapperAsync(tracksToLoadAtOneTime);
 	        return tracksDto;

@@ -57,7 +57,7 @@ namespace MusicApp.Controllers
 		    return RedirectToAction("Index", "Home");
 	    }
 
-        [HttpGet]
+	    [HttpGet]
 	    public IActionResult Login()
 	    {
 		    return View();

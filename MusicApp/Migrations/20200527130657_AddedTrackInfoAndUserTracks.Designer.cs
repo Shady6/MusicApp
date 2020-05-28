@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicApp.Data;
 
 namespace MusicApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200527130657_AddedTrackInfoAndUserTracks")]
+    partial class AddedTrackInfoAndUserTracks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace MusicApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a0d2649d-6c5b-40ce-be6c-1dc5d51d47d8",
-                            ConcurrencyStamp = "df58ea58-2428-4bb5-bec1-9f743b4fdab0",
+                            Id = "a0175577-bdbf-4575-a39f-52d44f5f76a5",
+                            ConcurrencyStamp = "b8feb0bd-6fe6-48a6-bb1d-5c7b9bd1d025",
                             Name = "Guest",
                             NormalizedName = "guest"
                         },
                         new
                         {
-                            Id = "3ec751c8-9fde-4558-958e-0d29ec8903b1",
-                            ConcurrencyStamp = "cd10e75a-16e1-404f-be01-761af1f31ea9",
+                            Id = "dde0088b-11cd-4cf1-bb3e-bb3685cd912a",
+                            ConcurrencyStamp = "e388f48b-bced-40d8-a496-5ffaf26ba94d",
                             Name = "Application User",
                             NormalizedName = "application_user"
                         });
@@ -361,8 +363,8 @@ namespace MusicApp.Migrations
                         .WithMany()
                         .HasForeignKey("ArtistId");
 
-                    b.HasOne("MusicApp.Data.Models.User", "User")
-                        .WithMany()
+                    b.HasOne("MusicApp.Data.Models.User", null)
+                        .WithMany("FavoriteTracks")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

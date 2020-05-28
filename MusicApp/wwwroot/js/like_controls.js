@@ -10,17 +10,12 @@ $(document).ready(() =>
 		{
 			// TODO check how to send properly data to api controller
 				let trackDto = convertToTrackDto(getDisplayedTrackJson());
-				let data = JSON.stringify({Body: trackDto});
-				console.log(data);
+				console.log(trackDto);	
 				$.ajax({
-					headers: { 
-						'Accept': 'application/json',
-						'Content-Type': 'application/json' 
-					},
+					contentType: 'application/json',
 					url: `https://localhost:44325/api/track`,
-					method: "POST",
-					dataType: 'json',
-					data: JSON.stringify({trackDto})	
+					type: "POST",
+					data: JSON.stringify(trackDto)	
 				});
 				createNextMusicCard();
 		});
