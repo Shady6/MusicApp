@@ -45,7 +45,7 @@ const setUpSwipeListeners = () => {
       hadnleSwipeStart();
     });
 
-  document
+  document 
     .querySelector(".albumCoverContainer")
     .addEventListener("touchmove", (e) => {
       handleSwipe(e);
