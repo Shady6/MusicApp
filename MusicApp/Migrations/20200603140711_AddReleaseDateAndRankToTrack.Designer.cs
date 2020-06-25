@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicApp.Data;
 
 namespace MusicApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200603140711_AddReleaseDateAndRankToTrack")]
+    partial class AddReleaseDateAndRankToTrack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace MusicApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "56bd48a7-4d35-4db3-93db-0c33ab127e79",
-                            ConcurrencyStamp = "35401f5f-603f-4004-b478-99c7878fed50",
+                            Id = "06f86782-9146-4860-af0a-142f08d3ce49",
+                            ConcurrencyStamp = "eb1e6d14-9798-4684-bea4-3cec7599508e",
                             Name = "Guest",
                             NormalizedName = "guest"
                         },
                         new
                         {
-                            Id = "4d376f8c-d336-400c-969b-55bf49510a01",
-                            ConcurrencyStamp = "9cb6b474-7a79-47b3-b374-24a0f7eb78ae",
+                            Id = "ad565aa9-8ed3-4ef4-b674-04352392e0d7",
+                            ConcurrencyStamp = "321e67e8-1757-4ea9-918a-fea214664cf0",
                             Name = "Application User",
                             NormalizedName = "application_user"
                         });
@@ -211,12 +213,6 @@ namespace MusicApp.Migrations
 
                     b.Property<int?>("ArtistId")
                         .HasColumnType("int");
-
-                    b.Property<float>("Bpm")
-                        .HasColumnType("real");
-
-                    b.Property<string>("DeezerLink")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("DeezerRank")
                         .HasColumnType("bigint");

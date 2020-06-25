@@ -3,7 +3,7 @@
 		$.ajax({
 			url: `https://localhost:44325/api/deezer/${count}`
 		}).then((data) => {
-			if (data.length >= 1) {
+			if (data.length >= 1) {	
 				resolve(data);
 			}
 		}).catch(err => { console.log(err) });

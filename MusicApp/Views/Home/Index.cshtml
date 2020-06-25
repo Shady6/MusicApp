@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="~/css/loadingSpinner.css" />
 	<link rel="stylesheet" href="~/css/loadingScreen.css" />
 	<link href="~/css/homePage.css" rel="stylesheet" />
+	<link href="~/css/trackLinks.css" rel="stylesheet" />
 }
 
 @section Scripts
@@ -25,26 +26,41 @@
 		</div>
 	</div>
 
-	<div class="container music-card-container" style="display: none;">
+	<div class="container music-card-container mx-auto" style="display: none;">
 		<div class="musicCard row text-white">
-			<div class="col-4 trackAbout d-flex flex-column justify-content-between">
+			<div class="col-0 col-md-4 trackAbout d-none d-md-flex flex-column justify-content-between">
+
+
 				<p>Author</p>
 				<p class="trackAuthor"></p>
 				<p>Title</p>
 				<p class="trackTitle"></p>
 				<p>Album</p>
 				<p class="albumTitle"></p>
+				<p>Release Date</p>
+				<p class="trackReleaseDate"></p>
+				<p>Deezer Rank</p>
+				<p class="trackDeezerRank"></p>
+				<p>Links</p>
+				<p class="track-links"></p>
 				<input class="trackAudioSource" type="hidden" />
-				<div class="audioControls">
-					@*<audio controls preload="auto">Your browser doesn't support audio</audio>*@
+
+			</div>
+
+			<div class="albumCoverContainer col-12 col-md-6 p-0">
+
+				<div class="audioControls mt-3">
+
+				</div>
+
+				<div class="d-none spinner justify-content-center align-items-center" style="height: 100%;">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
 				</div>
 			</div>
 
-			<div class="albumCoverContainer col-6 p-0">
-				@*<img class="albumCoverBackground img-fluid"></img>*@
-			</div>
-
-			<div class="col-2 text-center d-flex flex-column like-controls">
+			<div class="col-0 col-md-2 text-center d-none d-md-flex flex-column like-controls">
 				<div id="thumbsUpBtn">
 					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
 				</div>

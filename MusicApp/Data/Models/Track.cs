@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MusicApp.Data.Models
 {
@@ -12,5 +13,9 @@ namespace MusicApp.Data.Models
 		public string Preview { get; set; }
 		public Album Album { get; set; }
 		public User User { get; set; }
+		public string ReleaseDate { get; set; }
+		public long DeezerRank { get; set; }
+		public string DeezerLink { get; set; }
+		public float Bpm { get; set; }
 	}
 }

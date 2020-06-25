@@ -57,6 +57,9 @@ html, body, #main, main{
 	height: 100%;
 }
 
+html{
+  overflow: hidden;
+}
 
 .height100 {
 	height: 100%;
@@ -64,6 +67,7 @@ html, body, #main, main{
 
 main, body {
     background: #101010;
+    color: #fff;
 }
 
 

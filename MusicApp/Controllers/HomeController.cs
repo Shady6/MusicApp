@@ -37,8 +37,9 @@ namespace MusicApp.Controllers
 			string GuestId = _httpContextAccessor.HttpContext.Request.Cookies["GuestId"];
 			if (!String.IsNullOrEmpty(GuestId) && !_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
 			{
-				User guestToSignIn = _db.Users.Single(u => u.Id == GuestId);
-				await _signInManager.SignInAsync(guestToSignIn, true);
+				User guestToSignIn = _db.Users.SingleOrDefault(u => u.Id == GuestId);
+				if (guestToSignIn != null)
+					await _signInManager.SignInAsync(guestToSignIn, true);
 			}
 			else if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
 			{

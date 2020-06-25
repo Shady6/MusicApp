@@ -13,16 +13,14 @@
 }
 
 .trackAbout>p:nth-of-type(odd) {
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	margin-bottom: 0rem;
 	color: rgb(147, 167, 220);
 }
 
 .trackAbout>p:nth-of-type(even) {
-	margin-bottom: 2.3rem;
+	margin-bottom: 2rem;
 }
-
-
 
 .like-controls {
 	font-size: 5rem;
@@ -74,4 +72,13 @@
 img{
 	width: 100%;
 	height: 100%;
+	position: relative;
+}
+
+audio{
+	width: 100%;
+}
+
+.ease-out-transition-all{
+	transition: all .3s ease-out;
 }

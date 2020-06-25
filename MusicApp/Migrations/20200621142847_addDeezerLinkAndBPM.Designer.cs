@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicApp.Data;
 
 namespace MusicApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200621142847_addDeezerLinkAndBPM")]
+    partial class addDeezerLinkAndBPM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace MusicApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "56bd48a7-4d35-4db3-93db-0c33ab127e79",
-                            ConcurrencyStamp = "35401f5f-603f-4004-b478-99c7878fed50",
+                            Id = "256cd506-4ac1-415e-87c1-cf32df75bc63",
+                            ConcurrencyStamp = "babd38a7-57c7-421a-920e-4b41a09c5da6",
                             Name = "Guest",
                             NormalizedName = "guest"
                         },
                         new
                         {
-                            Id = "4d376f8c-d336-400c-969b-55bf49510a01",
-                            ConcurrencyStamp = "9cb6b474-7a79-47b3-b374-24a0f7eb78ae",
+                            Id = "07ecff68-c384-41d2-b74e-fb9d68b6836d",
+                            ConcurrencyStamp = "bbc67199-e9a9-43b1-ab19-7d66ced1fb78",
                             Name = "Application User",
                             NormalizedName = "application_user"
                         });
@@ -215,14 +217,14 @@ namespace MusicApp.Migrations
                     b.Property<float>("Bpm")
                         .HasColumnType("real");
 
-                    b.Property<string>("DeezerLink")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<long>("DeezerRank")
                         .HasColumnType("bigint");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Preview")
                         .HasColumnType("nvarchar(max)");

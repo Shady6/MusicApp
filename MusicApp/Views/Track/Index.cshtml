@@ -1,21 +1,76 @@
 ﻿@using MusicApp.Data.Models
 
-<div class="container-fluid p-0" id="tracks-wrapper">
-	@{
-		if (ViewBag.FavoriteTracks.Count == 0)
-		{
-			<h3>Like a song on home page to see it here.</h3>
-		}
-		else
-		{
-			<div class="row no-gutters">
-				@foreach (Track track in ViewBag.FavoriteTracks)
-				{
-				<div class="track-square col-3">
-					<img class="img-fluid" src="@track.Album.Cover_Big" />
-				</div>
-				}
+
+@section Scripts
+{
+	<script type="module" src="~/js/fav_tracks_pagination.js"></script>
+	<script type="module" src="~/js/track_actions.js"></script>
+}
+
+@section Styles
+{
+	<link href="~/css/tracksList.css" rel="stylesheet" />
+	<link href="~/css/pagination.css" rel="stylesheet" />
+	<link href="~/css/trackLinks.css" rel="stylesheet" />
+}
+
+<div class="container-fluid p-0 d-flex flex-column" id="tracks-wrapper">
+
+	<audio autoplay="true" style="display: none;"></audio>
+
+	<div class="no-tracks-added-info mt-5 ml-5">
+		<p>Like tracks from home page to see them here!</p>
+	</div>
+
+	<div id="track-list-container" class="row no-gutters">
+
+	</div>
+
+	<div id="pagination-controls" class="d-none mt-2 mx-4 mx-lg-4 mx-xl-5 justify-content-between">
+
+		<div class="row col-6 col-sm-9 col-md-9 col-lg-10 p-0">
+
+			<div class="d-none d-lg-block">
+				<button id="prevPage" class="btn btn-lg btn-info mx-lg-0"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+				<button id="nextPage" class="btn btn-lg btn-info mx-lg-0"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+
 			</div>
-		}
-	}
+			
+			
+				<p class=" mx-0 ml-lg-3" id="pages"></p>
+		
+			
+
+			<div class="d-none d-lg-block col-lg-2 px-lg-1">
+				<input id="go-to-page-input" class="form-control" type="number" placeholder="Page #"/>
+			</div>
+
+			<div class="d-none d-sm-block col-0 col-sm-4 col-md-3 col-lg-2 px-lg-1">
+				<input id="keyword-search-input" class="form-control" type="text" placeholder="Keyword"/>
+			</div>
+
+			<div class="d-none d-md-flex col-md-5 col-lg-3 px-lg-1">
+				<select id="sort-by" class="form-control mr-2">
+					<option value="Id">Not sorted</option>
+					<option value="Title">Title</option>
+					<option value="Artist.Name">Artist name</option>
+					<option value="Album.Title">Album title</option>
+					<option value="ReleaseDate">Release Date</option>
+					<option value="Duration">Duration</option>
+					<option value="DeezerRank">Deezer Rank</option>
+					<option value="Bpm">Bpm</option>
+				</select>
+
+				<i id="sort-ascending" class="text-lg fa fa-arrow-up mr-md-2 text-primary" aria-hidden="true"></i>
+				<i id="sort-descending" class="fa fa-arrow-down" aria-hidden="true"></i>
+			</div>
+		</div>
+
+
+		<div class="audio-stop-container row justify-content-end col-6 col-sm-3 col-md-3 col-lg-2 p-0">
+			<button disabled="true" class="audio-stop-btn btn btn-info px-0 px-md-2">Pause audio <i class="fa fa-pause"></i></button>
+		</div>
+
+	</div>
+
 </div>

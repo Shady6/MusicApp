@@ -1,0 +1,31 @@
+.track-links, .track-actions{
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  .track-actions > i {
+    z-index: 5;
+  }
+
+  .track-links a, .track-actions i{
+    transition: .2s linear;
+  }
+
+  .track-links a:hover, .track-actions i:hover{
+    opacity: 0.8;
+    text-decoration: none;
+  }
+
+  .svg-logo{
+    fill: white;
+    height: 1.5rem;
+    width: auto;
+  }
+
+  .deezer-logo{
+    height: 1rem;
+  }
+
+  .track-links > a{
+      color: white;
+  }
