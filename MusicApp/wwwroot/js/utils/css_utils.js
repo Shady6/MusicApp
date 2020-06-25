@@ -13,3 +13,9 @@ export const setCssPropertyCrossBrowser = (
   export const convertPixelUnitStringToNumber = (pixelString) => {
     return Number(pixelString.slice(0, pixelString.length - 2));
   };
+
+  export const setImgLeftTopAndRotationCss = (xOffset, yOffset, rotation) => {
+    $("img").css("left", `${xOffset}px`);
+    $("img").css("top", `${yOffset}px`);
+    setCssPropertyCrossBrowser("img", "transform", `rotate(${rotation}deg)`);
+  };

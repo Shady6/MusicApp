@@ -6,7 +6,7 @@ import { addTrackToFavorites } from "./track_actions.js";
 import { getViewportWidth, getViewportHeight } from "./utils/window_utils.js";
 import { clamp } from "./utils/math_utils.js";
 import {
-  setCssPropertyCrossBrowser,
+  setImgLeftTopAndRotationCss,
   convertPixelUnitStringToNumber,
 } from "./utils/css_utils.js";
 
@@ -14,9 +14,18 @@ let swipesXCoords = [];
 const maxRotation = 20;
 const maxOffscrenRotation = 45;
 const maxYOffset = 25;
+
 const yOffseetFactor = 1 / 3;
 const rotationFactor = 1 / 10;
+
+const xOffsetOffscreenPositionFactor = 0.77;
+const yOffsetOffscreenPositionFactor = 0.5;
+
 const xOffsetScreenWidthRatioToCreateNextCard = 1 / 3;
+
+const timeToGoOffScreen = 300;
+
+let canStartToSwipeAgain = true;
 
 $(document).ready(() => {
   setupLikeControlsListeners();
@@ -29,12 +38,11 @@ const setupLikeControlsListeners = () => {
 
 const setThumbsClicksListeners = () => {
   $("#thumbsUpBtn").on("click", () => {
-    addTrackToFavorites();
-    createNextMusicCard();
+    likeTrack();
   });
 
   $("#thumbsDownBtn").on("click", () => {
-    createNextMusicCard();
+    dislikeTrack();
   });
 };
 
@@ -42,20 +50,29 @@ const setUpSwipeListeners = () => {
   document
     .querySelector(".albumCoverContainer")
     .addEventListener("touchstart", () => {
-      hadnleSwipeStart();
+      if (canStartToSwipeAgain) hadnleSwipeStart();
     });
 
-  document 
+  document
     .querySelector(".albumCoverContainer")
     .addEventListener("touchmove", (e) => {
-      handleSwipe(e);
+      if (canStartToSwipeAgain) handleSwipe(e);
     });
 
   document
     .querySelector(".albumCoverContainer")
     .addEventListener("touchend", () => {
-      handleSwipeEnd();
+      if (canStartToSwipeAgain) handleSwipeEnd();
     });
+};
+
+const likeTrack = () => {
+  addTrackToFavorites();
+  createNextMusicCard();
+};
+
+const dislikeTrack = () => {
+  createNextMusicCard();
 };
 
 const hadnleSwipeStart = () => {
@@ -84,35 +101,40 @@ const handleSwipeEnd = () => {
   const cssLeftNumericalValue = convertPixelUnitStringToNumber(
     $("img").css("left")
   );
-  const cssTopNumericalValue = convertPixelUnitStringToNumber(
-    $("img").css("top")
-  );
-
   const xOffsetScreenWidthRatio = cssLeftNumericalValue / getViewportWidth();
 
   if (xOffsetScreenWidthRatio > xOffsetScreenWidthRatioToCreateNextCard) {
-    moveImageOffscreen();
-    addTrackToFavorites();
-    createNextMusicCard();
+    swipe(true);
   } else if (xOffsetScreenWidthRatio < -xOffsetScreenWidthRatioToCreateNextCard)
-    createNextMusicCard();
-  else setLeftTopAndRotation(0, 0, 0);
+    swipe(false);
+  else setImgLeftTopAndRotationCss(0, 0, 0);
 };
 
-const moveImageOffscreen = () => {
-  const {xOffset, yOffset} = calculateOffscrenPositionForCard();
+const swipe = (swipedRight = true) => {
+  canStartToSwipeAgain = false;
+  moveImageOffscreen(swipedRight);
 
-  setLeftTopAndRotation(xOffset, yOffset, maxRotation);
-}
+  setTimeout(() => {
+    if (swipedRight) likeTrack();
+    else dislikeTrack();
 
-const calculateOffscrenPositionForCard = (
-  cssLeftNumericalValue,
-  cssTopNumericalValue
-) => {
+    canStartToSwipeAgain = true;
+  }, timeToGoOffScreen);
+};
 
-  const xOffset = getViewportWidth() / 2 - $("img").width() / 2 - cssLeftNumericalValue;
-  const yOffset = getViewportHeight() / 2 - $("img").height() / 2 + cssTopNumericalValue;
-  return {xOffset, yOffset};
+const moveImageOffscreen = (goRight) => {
+  const directionValue = goRight ? 1 : -1;
+  const { xOffset, yOffset } = calculateOffscrenPositionForCard(directionValue);
+  setImgLeftTopAndRotationCss(xOffset, yOffset, maxOffscrenRotation * directionValue);
+};
+
+const calculateOffscrenPositionForCard = (directionValue) => {
+  const xOffset =
+  directionValue *
+    (getViewportWidth() * xOffsetOffscreenPositionFactor +
+      $("img").width() / 2);
+  const yOffset = -getViewportHeight() * yOffsetOffscreenPositionFactor;
+  return { xOffset, yOffset };
 };
 
 const tiltImage = (cssLeftNumericalValue, deltaSwpieXCoords) => {
@@ -120,7 +142,7 @@ const tiltImage = (cssLeftNumericalValue, deltaSwpieXCoords) => {
     cssLeftNumericalValue,
     deltaSwpieXCoords
   );
-  setLeftTopAndRotation(xOffset, yOffset, rotation);
+  setImgLeftTopAndRotationCss(xOffset, yOffset, rotation);
 };
 
 const calculateLeftTopAndRotation = (
@@ -139,12 +161,6 @@ const calculateLeftTopAndRotation = (
     maxRotation
   );
   return { xOffset, yOffset, rotation };
-};
-
-const setLeftTopAndRotation = (xOffset, yOffset, rotation) => {
-  $("img").css("left", `${xOffset}px`);
-  $("img").css("top", `${yOffset}px`);
-  setCssPropertyCrossBrowser("img", "transform", `rotate(${rotation}deg)`);
 };
 
 export const setLoadingOnLikeControl = () => {
