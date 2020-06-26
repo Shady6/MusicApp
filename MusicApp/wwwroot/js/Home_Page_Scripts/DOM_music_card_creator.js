@@ -1,4 +1,5 @@
-﻿import { createTrackLinksOverlay, createTrackAboutOverlay } from "./DOM_fav_tracks_creator.js";
+﻿import { createTrackLinksOverlay, createTrackAboutOverlay } from "../TrackList_Page_Scripts/DOM_fav_tracks_creator.js";
+import {firstImage} from "./tracks_loader.js";
 
 let track = null;
 let firstTrack = true;
@@ -13,7 +14,8 @@ export const emptyMusicCard = () => {
   $(".trackReleaseDate").html("");
   $(".trackDeezerRank").html("");
   $(".hovereffect").addClass("d-none");
-  $(".overlay").html("");
+  $(".track-info").remove();
+  $(".track-links").remove();
 };
 
 const showCard = () => {
@@ -75,7 +77,7 @@ const setTrackAudio = () => {
 };
 
 const setTrackAboutOverlayMobile = () => {
-  $(".overlay").html(createTrackAboutOverlay(track));
+  $(".overlay").append(createTrackAboutOverlay(track));
 }
 
 const setTrackLinksOverlayMobile = () => {
@@ -109,11 +111,22 @@ const createMusicCard = (trackArg) => {
   if ($("audio")) prevVolume = $("audio").prop("volume");
   track = trackArg;
 
+  setFirstAlbumCoverImageLoadedListener();
+
+  emptyMusicCard();
+
   hideLoadingSpinner();
 
-  showCard();
+  if (!firstImage)
+    showCard();  
 
   setTrackAbout();
 };
+
+const setFirstAlbumCoverImageLoadedListener = () => {
+  document.addEventListener("onFirstAlbumCoverImageLoaded", () => {
+    showCard();
+  });
+}
 
 export default createMusicCard;

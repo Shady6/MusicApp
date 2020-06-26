@@ -1,6 +1,6 @@
 import { loadAllUserTracks } from "./track_actions.js";
 import { insertTrackIntoHTML } from "./DOM_fav_tracks_creator.js";
-import {getViewportWidth} from "./utils/window_utils.js";
+import {getViewportWidth} from "../utils/window_utils.js";
 
 const pageInputSearchDelay = 400;
 const keywordInputSearchDelay = 400;

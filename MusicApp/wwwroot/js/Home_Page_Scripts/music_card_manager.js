@@ -14,12 +14,18 @@ let trackBufferEvent;
 
 $(document).ready(() => {
   if (window.location.href.slice(-5) !== "Track") {
+    setOnFirstAlbumCoverImageLoadedListener();
     initializeTrackBufferEvent();
     createInitialMusicCard();
-    disposeMainLoadingScreen();
     loadTracksToBuffer();
   }
 });
+
+const setOnFirstAlbumCoverImageLoadedListener = () => {
+  document.addEventListener("onFirstAlbumCoverImageLoaded", () => {
+    disposeMainLoadingScreen();
+  });
+};
 
 export const getDisplayedTrackJson = () => {
   return tracks[displayedTrackIndex];

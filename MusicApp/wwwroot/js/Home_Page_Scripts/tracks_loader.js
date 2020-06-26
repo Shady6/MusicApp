@@ -1,4 +1,6 @@
-﻿const loadTracksInfo = (count) => {
+﻿export let firstImage = true;
+
+const loadTracksInfo = (count) => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `https://localhost:44325/api/deezer/${count}`,
@@ -21,11 +23,18 @@ const setImageDownloadingListeners = (downloadingImage, track) => {
   downloadingImage.onerror = function () {
     handleImageNotLoaded(downloadingImage, track);
   };
-  downloadingImage.onsuccess = function () {
+  downloadingImage.onload = function () {
     track.Album.imageLoadedMessage = "OK";
-
+    dispatchOnFirstImageLoaded();
   }
 };
+
+const dispatchOnFirstImageLoaded = () => {
+  if (firstImage){
+    firstImage = false;
+    document.dispatchEvent(new Event("onFirstAlbumCoverImageLoaded"));
+  }
+}
 
 const handleImageNotLoaded = (downloadingImage, track) => {
   track.Album.imageLoadedMessage = "Couldn't load the image.";

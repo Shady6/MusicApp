@@ -22,10 +22,6 @@
 	margin-bottom: 2rem;
 }
 
-.like-controls {
-	font-size: 5rem;
-}
-
 .like-controls>div {
 	position: relative;
 	height: 50%;
@@ -63,7 +59,8 @@
 	cursor: pointer;
 }
 
-.like-controls i {
+.thumb-icon {
+  font-size: 5rem;
 	position: absolute;
 	top: calc(50% - 2.5rem);
 	left: calc(50% - 2.5rem);
@@ -83,7 +80,32 @@ audio{
 	transition: all .4s ease-out;
 }
 
+.ease-out-transition-all-long{
+	transition: all .7s ease-out;
+}
+
 .no-hover-on-PC{
 	pointer-events: none;
+}
+
+.like-indicator-mobile{
+  position: absolute;
+  width: 38%;
+  height: 38%;
+  z-index: 5;
+  opacity: 0;
+}
+
+.like-indicator-mobile:nth-of-type(1){
+  left:0;
+  top:62%;
+  background: #71dc06;
+}
+
+.like-indicator-mobile:nth-of-type(2){
+  position: absolute;
+  left: 62%;
+  top:62%;
+  background: red;
 }
 

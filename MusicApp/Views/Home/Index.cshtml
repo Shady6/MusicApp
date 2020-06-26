@@ -10,8 +10,8 @@
 
 @section Scripts
 {
-	<script type="module" src="js/music_card_manager.js"></script>
-	<script type="module" src="~/js/like_controls.js"></script>
+	<script type="module" src="~/js/Home_Page_Scripts/music_card_manager.js"></script>
+	<script type="module" src="~/js/Home_Page_Scripts/like_controls.js"></script>
 }
 
 <div class="container-fluid">
@@ -51,10 +51,15 @@
 			<div class="albumCoverContainer col-12 col-md-6 p-0">
 
 
-				<div class="hovereffect no-hover-on-PC">
+				<div class="ease-out-transition-all-long hovereffect no-hover-on-PC">
 
 					<div class="overlay d-flex flex-column justify-content-around">
-
+						<div class="ease-out-transition-all-long d-none thumbs-up-div-mobile like-indicator-mobile">
+							<i class="thumb-icon fa fa-thumbs-up" aria-hidden="true"></i>
+						</div>
+						<div class="ease-out-transition-all-long d-none thumbs-down-div-mobile like-indicator-mobile">
+							<i class="thumb-icon fa fa-thumbs-down" aria-hidden="true"></i>
+						</div>
 					</div>
 				</div>
 
@@ -71,10 +76,10 @@
 
 			<div class="col-0 col-md-2 text-center d-none d-md-flex flex-column like-controls">
 				<div id="thumbsUpBtn">
-					<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+					<i class="thumb-icon fa fa-thumbs-up" aria-hidden="true"></i>
 				</div>
 				<div id="thumbsDownBtn">
-					<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+					<i class="thumb-icon fa fa-thumbs-down" aria-hidden="true"></i>
 				</div>
 			</div>
 		</div>

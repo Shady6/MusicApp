@@ -1,5 +1,5 @@
-import { getDisplayedTrackJson } from "./music_card_manager.js";
-import { convertToTrackDto } from "./track_data_processor.js";
+import { getDisplayedTrackJson } from "../Home_Page_Scripts/music_card_manager.js";
+import { convertToTrackDto } from "../track_data_processor.js";
 import { deleteTrackFromMemory } from "./fav_tracks_pagination.js";
 
 $(document).ready(() => {
