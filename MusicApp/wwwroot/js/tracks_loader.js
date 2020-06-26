@@ -16,22 +16,33 @@
 
 const setImageDownloadingListeners = (downloadingImage, track) => {
   downloadingImage.onabort = function () {
-    track.album.imageLoadedMessage = "Couldn't load the image.";
+    handleImageNotLoaded(downloadingImage, track);
   };
   downloadingImage.onerror = function () {
-    track.album.imageLoadedMessage = "Couldn't load the image.";
+    handleImageNotLoaded(downloadingImage, track);
   };
+  downloadingImage.onsuccess = function () {
+    track.Album.imageLoadedMessage = "OK";
+
+  }
 };
 
-const loadBackgroundImage = (track) => {
+const handleImageNotLoaded = (downloadingImage, track) => {
+  track.Album.imageLoadedMessage = "Couldn't load the image.";
+  loadBackgroundImage(downloadingImage, "./images/music_note_background.png");
+}
+
+const loadBackgroundImage = (downloadingImage, src) => {
+  downloadingImage.src = src;
+};
+
+const tryToLoadBackgroundImage = (track) => {
   let downloadingImage = new Image();
-
   track.Album.image = downloadingImage;
-  track.Album.imageLoadedMessage = "OK";
-
   setImageDownloadingListeners(downloadingImage, track);
-  downloadingImage.src = track.Album.Cover_Big;
-};
+
+  loadBackgroundImage(downloadingImage, track.Album.Cover_Big);
+}
 
 const setAudioDownloadingListeners = (downloadingAudio, track) => {
   downloadingAudio.onabort = function () {
@@ -57,7 +68,7 @@ async function getTracks(count) {
   let tracks = await loadTracksInfo(count);
 
   tracks.forEach((track, i) => {
-    loadBackgroundImage(track);
+    tryToLoadBackgroundImage(track);
     loadAudio(track);
   });
 

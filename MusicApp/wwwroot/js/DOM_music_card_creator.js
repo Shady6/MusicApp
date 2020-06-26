@@ -13,6 +13,7 @@ export const emptyMusicCard = () => {
   $(".trackReleaseDate").html("");
   $(".trackDeezerRank").html("");
   $(".hovereffect").addClass("d-none");
+  $(".overlay").html("");
 };
 
 const showCard = () => {
@@ -74,11 +75,16 @@ const setTrackAudio = () => {
 };
 
 const setTrackAboutOverlayMobile = () => {
-  $(".overlay").append(createTrackAboutOverlay(track));
+  $(".overlay").html(createTrackAboutOverlay(track));
 }
 
 const setTrackLinksOverlayMobile = () => {
   $(".overlay").append(createTrackLinksOverlay(track));
+}
+
+const setTrackOverlayInfoMobile = () => {
+  setTrackAboutOverlayMobile();
+  setTrackLinksOverlayMobile();
 }
 
 const setTrackAbout = () => {
