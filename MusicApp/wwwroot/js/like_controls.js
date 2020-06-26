@@ -6,9 +6,11 @@ import { addTrackToFavorites } from "./track_actions.js";
 import { getViewportWidth, getViewportHeight } from "./utils/window_utils.js";
 import { clamp } from "./utils/math_utils.js";
 import {
-  setImgLeftTopAndRotationCss,
+  setLeftTopAndRotationCss,
   convertPixelUnitStringToNumber,
 } from "./utils/css_utils.js";
+
+const tramsformedElementSelector = ".hovereffect";
 
 let swipesXCoords = [];
 const maxRotation = 20;
@@ -18,12 +20,12 @@ const maxYOffset = 25;
 const yOffseetFactor = 1 / 3;
 const rotationFactor = 1 / 10;
 
-const xOffsetOffscreenPositionFactor = 0.77;
-const yOffsetOffscreenPositionFactor = 0.5;
+const xOffsetOffscreenPositionFactor = 0.9;
+const yOffsetOffscreenPositionFactor = 0.6;
 
 const xOffsetScreenWidthRatioToCreateNextCard = 1 / 3;
 
-const timeToGoOffScreen = 300;
+const timeToGoOffScreen = 400;
 
 let canStartToSwipeAgain = true;
 
@@ -76,7 +78,8 @@ const dislikeTrack = () => {
 };
 
 const hadnleSwipeStart = () => {
-  $("img").removeClass("ease-out-transition-all");
+  $(tramsformedElementSelector).removeClass("ease-out-transition-all");
+  $(tramsformedElementSelector).removeClass("no-hover-on-PC");
   swipesXCoords = [];
 };
 
@@ -85,7 +88,7 @@ const handleSwipe = (e) => {
 
   if (swipesXCoords.length == 2) {
     let cssLeftNumericalValue = convertPixelUnitStringToNumber(
-      $("img").css("left")
+      $(tramsformedElementSelector).css("left")
     );
     const deltaSwpieXCoords = swipesXCoords[1] - swipesXCoords[0];
 
@@ -96,10 +99,10 @@ const handleSwipe = (e) => {
 };
 
 const handleSwipeEnd = () => {
-  $("img").addClass("ease-out-transition-all");
+  $(tramsformedElementSelector).addClass("ease-out-transition-all");
 
   const cssLeftNumericalValue = convertPixelUnitStringToNumber(
-    $("img").css("left")
+    $(tramsformedElementSelector).css("left")
   );
   const xOffsetScreenWidthRatio = cssLeftNumericalValue / getViewportWidth();
 
@@ -107,7 +110,7 @@ const handleSwipeEnd = () => {
     swipe(true);
   } else if (xOffsetScreenWidthRatio < -xOffsetScreenWidthRatioToCreateNextCard)
     swipe(false);
-  else setImgLeftTopAndRotationCss(0, 0, 0);
+  else setLeftTopAndRotationCss(tramsformedElementSelector ,0, 0, 0);
 };
 
 const swipe = (swipedRight = true) => {
@@ -117,6 +120,8 @@ const swipe = (swipedRight = true) => {
   setTimeout(() => {
     if (swipedRight) likeTrack();
     else dislikeTrack();
+    // zrobic cos z tym tutaj zeby bylo dobre przejscie
+    setLeftTopAndRotationCss(tramsformedElementSelector ,0, 0, 0);
 
     canStartToSwipeAgain = true;
   }, timeToGoOffScreen);
@@ -125,14 +130,14 @@ const swipe = (swipedRight = true) => {
 const moveImageOffscreen = (goRight) => {
   const directionValue = goRight ? 1 : -1;
   const { xOffset, yOffset } = calculateOffscrenPositionForCard(directionValue);
-  setImgLeftTopAndRotationCss(xOffset, yOffset, maxOffscrenRotation * directionValue);
+  setLeftTopAndRotationCss(tramsformedElementSelector, xOffset, yOffset, maxOffscrenRotation * directionValue);
 };
 
 const calculateOffscrenPositionForCard = (directionValue) => {
   const xOffset =
   directionValue *
     (getViewportWidth() * xOffsetOffscreenPositionFactor +
-      $("img").width() / 2);
+      $(tramsformedElementSelector).width() / 2);
   const yOffset = -getViewportHeight() * yOffsetOffscreenPositionFactor;
   return { xOffset, yOffset };
 };
@@ -142,7 +147,7 @@ const tiltImage = (cssLeftNumericalValue, deltaSwpieXCoords) => {
     cssLeftNumericalValue,
     deltaSwpieXCoords
   );
-  setImgLeftTopAndRotationCss(xOffset, yOffset, rotation);
+  setLeftTopAndRotationCss(tramsformedElementSelector, xOffset, yOffset, rotation);
 };
 
 const calculateLeftTopAndRotation = (

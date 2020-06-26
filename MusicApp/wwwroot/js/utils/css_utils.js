@@ -14,8 +14,8 @@ export const setCssPropertyCrossBrowser = (
     return Number(pixelString.slice(0, pixelString.length - 2));
   };
 
-  export const setImgLeftTopAndRotationCss = (xOffset, yOffset, rotation) => {
-    $("img").css("left", `${xOffset}px`);
-    $("img").css("top", `${yOffset}px`);
-    setCssPropertyCrossBrowser("img", "transform", `rotate(${rotation}deg)`);
+  export const setLeftTopAndRotationCss = (querySelector, xOffset, yOffset, rotation) => {
+    $(querySelector).css("left", `${xOffset}px`);
+    $(querySelector).css("top", `${yOffset}px`);
+    setCssPropertyCrossBrowser(querySelector, "transform", `rotate(${rotation}deg)`);
   };

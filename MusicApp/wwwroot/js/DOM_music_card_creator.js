@@ -1,4 +1,4 @@
-﻿import { createTrackLinks } from "./DOM_fav_tracks_creator.js";
+﻿import { createTrackLinksOverlay, createTrackAboutOverlay } from "./DOM_fav_tracks_creator.js";
 
 let track = null;
 let firstTrack = true;
@@ -12,47 +12,49 @@ export const emptyMusicCard = () => {
   $(".audioControls").html("");
   $(".trackReleaseDate").html("");
   $(".trackDeezerRank").html("");
+  $(".hovereffect").addClass("d-none");
 };
 
 const showCard = () => {
   $(".music-card-container").css("display", "block");
+  $(".hovereffect").removeClass("d-none");
 };
 
 const setTrackLinks = () => {
   $(".track-links").html(
-    createTrackLinks(`${track.title} ${track.artist.name}`, track.link)
+    createTrackLinksOverlay(`${track.Title} ${track.Artist.Name}`, track.Link)
   );
 };
 
 const setTrackReleaseDate = () => {
   $(".trackReleaseDate").text(
-    track.release_date == "0000-00-00" ? "Unknown" : track.release_date
+    track.release_date == "0000-00-00" ? "Unknown" : track.Release_date
   );
 };
 
 const setTrackDeezerRank = () => {
   let trackRank = "Unknown";
-  if (track.rank && track.rank > 10) trackRank = track.rank;
+  if (track.Rank && track.Rank > 10) trackRank = track.Rrank;
   $(".trackDeezerRank").text(trackRank);
 };
 
 const setTrackAuthor = () => {
-  $(".trackAuthor").text(track.artist.name);
+  $(".trackAuthor").text(track.Artist.Name);
 };
 
 const setTrackTitle = () => {
-  $(".trackTitle").text(track.title);
+  $(".trackTitle").text(track.Title);
 };
 
 const setTrackAlbumTitle = () => {
-  $(".albumTitle").text(track.album.title);
+  $(".albumTitle").text(track.Album.Title);
 };
 
 const setTrackAlbumCoverImage = () => {
   if ($(".albumCoverContainer img").length === 1)
     $(".albumCoverContainer img").remove();
 
-  $(".albumCoverContainer").prepend(track.album.image);
+  $(".hovereffect").prepend(track.Album.image);
 };
 
 const setTrackAudio = () => {
@@ -71,7 +73,17 @@ const setTrackAudio = () => {
   }
 };
 
+const setTrackAboutOverlayMobile = () => {
+  $(".overlay").append(createTrackAboutOverlay(track));
+}
+
+const setTrackLinksOverlayMobile = () => {
+  $(".overlay").append(createTrackLinksOverlay(track));
+}
+
 const setTrackAbout = () => {
+  setTrackAboutOverlayMobile();
+  setTrackLinksOverlayMobile();
   setTrackAudio();
   setTrackAlbumCoverImage();
   setTrackAuthor();

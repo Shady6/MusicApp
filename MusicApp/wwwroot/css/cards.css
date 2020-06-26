@@ -80,5 +80,10 @@ audio{
 }
 
 .ease-out-transition-all{
-	transition: all .3s ease-out;
+	transition: all .4s ease-out;
 }
+
+.no-hover-on-PC{
+	pointer-events: none;
+}
+

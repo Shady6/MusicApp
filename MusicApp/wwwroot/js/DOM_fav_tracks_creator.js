@@ -10,30 +10,13 @@ export const insertTrackIntoHTML = (i, track) => {
 const createTrackCardHTML = (parentDivId, searchQuery, track) => {
   return `
   <div class="image-card-wrapper col-lg-3 col-md-4 col-sm-6 col-12" id="${parentDivId}">
-						<div class="hovereffect">
+            <div class="hovereffect">            
 							<img class="" src="${track.Album.Cover_Big}" alt="">
 							<div class="overlay d-flex flex-column justify-content-around">
-
-								<div class="track-info">
-									<p><span class="track-title">${
-                    track.Title
-                  }</span> by <span class="track-author">${
-    track.Artist.Name
-  }</span></p>
-									<p><span class="track-album">${track.Album.Title}</span></p>
-								</div>
-								<div class="d-flex flex-column justify-content-between">
-									<p class="track-links">
-										${createTrackLinks(searchQuery, track.DeezerLink)}
-                  </p>
-                  <p class="track-actions">
-                    <i class="fa fa-play" track-src="${track.Preview}" aria-hidden="true"></i>
-                    <i class="fa fa-pause" style="display:none;" aria-hidden="true"></i>
-                    <i class="fa fa-repeat" aria-hidden="true"></i>
-										<i parent-wrapper-id="${parentDivId}" track-title="${
-    track.Title.replace(/"/g, "&quot;")
-  }" class="fa fa-trash" aria-hidden="true"></i>
-									</p>
+							${createTrackAboutOverlay(track)}
+								<div class="d-flex flex-column justify-content-between">									
+										${createTrackLinksOverlay(searchQuery, track.DeezerLink)}          
+                  ${createTrackActionsOverlay(track, parentDivId)}
 								</div>
 							</div>
 						</div>
@@ -41,8 +24,30 @@ const createTrackCardHTML = (parentDivId, searchQuery, track) => {
   `;
 };
 
-export const createTrackLinks = (searchQuery, deezerLink) => {
+export const createTrackAboutOverlay = (track) => {
   return `
+  <div class="track-info">
+  <p><span class="track-title">${track.Title}</span> by <span class="track-author">${track.Artist.Name}</span></p>
+  <p><span class="track-album">${track.Album.Title}</span></p>
+</div>`;
+};
+
+export const createTrackActionsOverlay = (track, parentDivId) => {
+  return `
+  <p class="track-actions">
+  <i class="fa fa-play" track-src="${track.Preview}" aria-hidden="true"></i>
+  <i class="fa fa-pause" style="display:none;" aria-hidden="true"></i>
+  <i class="fa fa-repeat" aria-hidden="true"></i>
+  <i parent-wrapper-id="${parentDivId}" track-title="${track.Title.replace(
+    /"/g,
+    "&quot;"
+  )}" class="fa fa-trash" aria-hidden="true"></i>
+</p>`;
+};
+
+export const createTrackLinksOverlay = (searchQuery, deezerLink) => {
+  return `
+  <p class="track-links">
 	  <a target="_blank" href="${"https://open.spotify.com/search/" + searchQuery}">
 	  <i class="fa fa-spotify" aria-hidden="true"></i>
   </a>
@@ -101,5 +106,6 @@ export const createTrackLinks = (searchQuery, deezerLink) => {
 
 </g>
 </svg>
-  </a>`;
+  </a>
+  </p>`;
 };
