@@ -1,6 +1,6 @@
 import { loadAllUserTracks } from "./track_actions.js";
 import { insertTrackIntoHTML } from "./DOM_fav_tracks_creator.js";
-import {getViewportWidth} from "../utils/window_utils.js";
+import { getViewportWidth } from "../utils/window_utils.js";
 
 const pageInputSearchDelay = 400;
 const keywordInputSearchDelay = 400;
@@ -11,13 +11,15 @@ let vw = 0;
 
 const minTracksOnPage = 2;
 const maxTracksOnPage = 8;
-let tracksOnPage = maxTracksOnPage;
+export let tracksOnPage = maxTracksOnPage;
 let tracks = [];
 let tracksCopy = [];
-let currentPage = 0;
+export let currentPage = 0;
 let controlsHidden = false;
 
 const controls = $("#pagination-controls");
+
+let dispatchedFirstTracksRendered = false;
 
 $(document).ready(() => {
   wrapper();
@@ -131,12 +133,28 @@ const renderControlsAndTracks = () => {
   if (tracks.length > 0) {
     $(".no-tracks-added-info").hide();
     showControls();
+    const firstTrackOfCurrentPageIndex = currentPage * tracksOnPage;
+    const lastTrackOfCurrentPageIndex = (currentPage + 1) * tracksOnPage;
+    const firstTrackOfPrevPageIndex =
+      firstTrackOfCurrentPageIndex - tracksOnPage;
     for (
-      let i = currentPage * tracksOnPage;
-      i < (currentPage + 1) * tracksOnPage && i < tracks.length;
+      let i =
+        firstTrackOfPrevPageIndex >= 0
+          ? firstTrackOfPrevPageIndex
+          : firstTrackOfCurrentPageIndex;
+      i < lastTrackOfCurrentPageIndex + tracksOnPage && i < tracks.length;
       i++
     )
-      insertTrackIntoHTML(i, tracks[i]);
+      insertTrackIntoHTML(
+        i,
+        tracks[i],
+        i >= firstTrackOfCurrentPageIndex && i < lastTrackOfCurrentPageIndex
+      );
+
+    if (!dispatchedFirstTracksRendered) {
+      dispatchedFirstTracksRendered = true;
+      document.dispatchEvent(new Event("onFirstTracksRendered"));
+    }
   }
 };
 
@@ -157,16 +175,16 @@ const setResizeListener = () => {
     vw = getViewportWidth();
     setTracksOnPageNumber();
 
-    if (prevTracksOnPage != tracksOnPage){
+    if (prevTracksOnPage != tracksOnPage) {
       rerender();
     }
   };
 };
 
 const setTracksOnPageNumber = () => {
-  if (vw < 576) tracksOnPage = Math.round(maxTracksOnPage * 1/4);
-  else if (vw < 768) tracksOnPage = Math.round(maxTracksOnPage * 1/2);
-  else if (vw < 992) tracksOnPage = Math.round(maxTracksOnPage * 3/4);
+  if (vw < 576) tracksOnPage = Math.round((maxTracksOnPage * 1) / 4);
+  else if (vw < 768) tracksOnPage = Math.round((maxTracksOnPage * 1) / 2);
+  else if (vw < 992) tracksOnPage = Math.round((maxTracksOnPage * 3) / 4);
   else tracksOnPage = Math.round(maxTracksOnPage);
 };
 
@@ -223,12 +241,11 @@ const sortDirectionButtonHandler = (sortAsc) => {
 const selectSortingTypeHandler = (sortingType) => {
   const keyword = $("#keyword-search-input").val();
 
-  if (!keyword){
+  if (!keyword) {
     sortTracks(tracksCopy, sortingType);
     tracks = [...tracksCopy];
     rerender();
-  }
-  else{
+  } else {
     sortTracks(tracksCopy, sortingType);
     keywordSeachHandler(keyword, currentPage);
   }
@@ -280,4 +297,8 @@ const sortTracks = (tracksToSort, sortingType) => {
   });
 
   if (!sortAscending) tracksToSort.reverse();
+};
+
+export const getTracksLength = () => {
+  return tracks.length;
 };

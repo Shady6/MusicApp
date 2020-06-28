@@ -1,15 +1,15 @@
-export const insertTrackIntoHTML = (i, track) => {
+export const insertTrackIntoHTML = (i, track, isVisible) => {
   let parentDivId = "track-card-wrapper-" + i;
   let searchQuery = track.Title + " " + track.Artist.Name;
 
-  let trackCardHTML = createTrackCardHTML(parentDivId, searchQuery, track);
+  let trackCardHTML = createTrackCardHTML(parentDivId, searchQuery, track, isVisible);
 
   $("#track-list-container").append(trackCardHTML);
 };
 
-const createTrackCardHTML = (parentDivId, searchQuery, track) => {
+const createTrackCardHTML = (parentDivId, searchQuery, track, isVisible) => {
   return `
-  <div class="image-card-wrapper col-lg-3 col-md-4 col-sm-6 col-12" id="${parentDivId}">
+  <div class="${isVisible ? "" : "d-none"} image-card-wrapper col-lg-3 col-md-4 col-sm-6 col-12" id="${parentDivId}">
             <div class="hovereffect">            
 							<img class="" src="${track.Album.Cover_Big}" alt="">
 							<div class="overlay d-flex flex-column justify-content-around">
