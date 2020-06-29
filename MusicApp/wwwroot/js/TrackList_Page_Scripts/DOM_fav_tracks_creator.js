@@ -34,7 +34,7 @@ export const createTrackAboutOverlay = (track) => {
 
 export const createTrackActionsOverlay = (track, parentDivId) => {
   return `
-  <p class="track-actions">
+  <p class="track-actions disabled-link-mobile">
   <i class="fa fa-play" track-src="${track.Preview}" aria-hidden="true"></i>
   <i class="fa fa-pause" style="display:none;" aria-hidden="true"></i>
   <i class="fa fa-repeat" aria-hidden="true"></i>
@@ -47,7 +47,7 @@ export const createTrackActionsOverlay = (track, parentDivId) => {
 
 export const createTrackLinksOverlay = (searchQuery, deezerLink) => {
   return `
-  <p class="track-links">
+  <p class="track-links disabled-link-mobile">
 	  <a target="_blank" href="${"https://open.spotify.com/search/" + searchQuery}">
 	  <i class="fa fa-spotify" aria-hidden="true"></i>
   </a>

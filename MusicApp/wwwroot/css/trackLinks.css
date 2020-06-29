@@ -29,3 +29,14 @@
   .track-links > a{
       color: white;
   }
+
+  
+  @media only screen and (max-width: 767px){
+
+
+    .disabled-link-mobile{
+      pointer-events: none;
+    }
+    
+  }
+

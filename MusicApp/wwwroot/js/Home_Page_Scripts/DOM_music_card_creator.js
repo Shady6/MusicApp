@@ -1,5 +1,9 @@
-﻿import { createTrackLinksOverlay, createTrackAboutOverlay } from "../TrackList_Page_Scripts/DOM_fav_tracks_creator.js";
-import {firstImage} from "./tracks_loader.js";
+﻿import {
+  createTrackLinksOverlay,
+  createTrackAboutOverlay,
+} from "../TrackList_Page_Scripts/DOM_fav_tracks_creator.js";
+import { firstImage } from "./tracks_loader.js";
+import { getViewportWidth } from "../utils/window_utils.js";
 
 let track = null;
 let firstTrack = true;
@@ -24,7 +28,7 @@ const showCard = () => {
 };
 
 const setTrackLinks = () => {
-  $(".track-links").html(
+  $(".track-links-pc").html(
     createTrackLinksOverlay(`${track.Title} ${track.Artist.Name}`, track.Link)
   );
 };
@@ -78,20 +82,18 @@ const setTrackAudio = () => {
 
 const setTrackAboutOverlayMobile = () => {
   $(".overlay").append(createTrackAboutOverlay(track));
-}
+};
 
 const setTrackLinksOverlayMobile = () => {
-  $(".overlay").append(createTrackLinksOverlay(track));
-}
-
-const setTrackOverlayInfoMobile = () => {
-  setTrackAboutOverlayMobile();
-  setTrackLinksOverlayMobile();
-}
+  $(".overlay").append(
+    createTrackLinksOverlay(`${track.Title} ${track.Artist.Name}`, track.Link)
+  );
+};
 
 const setTrackAbout = () => {
   setTrackAboutOverlayMobile();
   setTrackLinksOverlayMobile();
+
   setTrackAudio();
   setTrackAlbumCoverImage();
   setTrackAuthor();
@@ -104,8 +106,8 @@ const setTrackAbout = () => {
 
 const hideLoadingSpinner = () => {
   $(".albumCoverContainer > .spinner").removeClass("d-flex");
-	$(".albumCoverContainer > .spinner").addClass("d-none");
-}
+  $(".albumCoverContainer > .spinner").addClass("d-none");
+};
 
 const createMusicCard = (trackArg) => {
   if ($("audio")) prevVolume = $("audio").prop("volume");
@@ -117,8 +119,7 @@ const createMusicCard = (trackArg) => {
 
   hideLoadingSpinner();
 
-  if (!firstImage)
-    showCard();  
+  if (!firstImage) showCard();
 
   setTrackAbout();
 };
@@ -127,6 +128,6 @@ const setFirstAlbumCoverImageLoadedListener = () => {
   document.addEventListener("onFirstAlbumCoverImageLoaded", () => {
     showCard();
   });
-}
+};
 
 export default createMusicCard;
