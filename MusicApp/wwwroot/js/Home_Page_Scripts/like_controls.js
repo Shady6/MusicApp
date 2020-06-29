@@ -100,6 +100,7 @@ const dislikeTrack = () => {
 const hadnleSwipeStart = () => {
   $(".like-indicator-mobile").removeClass("d-none");
   $(".like-indicator-mobile").removeClass("ease-out-transition-all");
+  $(".like-indicator-mobile").removeClass("z-index-5");
   $(tramsformedElementSelector).removeClass("ease-out-transition-all");
   $(tramsformedElementSelector).removeClass("no-hover-on-PC");
   swipesXCoords = [];
@@ -107,6 +108,7 @@ const hadnleSwipeStart = () => {
 
 const handleSwipe = (e) => {
   swipesXCoords.push(e.touches[0].pageX);
+  $(".like-indicator-mobile").addClass("z-index-5");
 
   if (swipesXCoords.length == 2) {
     let cssLeftNumericalValue = convertPixelUnitStringToNumber(
@@ -135,6 +137,7 @@ const showLikeIndicator = (cssLeftNumericalValue) => {
   );
   likeIndicator.css("opacity", opacityValue);
 };
+
 
 const handleSwipeEnd = () => {
   $(tramsformedElementSelector).addClass("ease-out-transition-all");

@@ -92,8 +92,11 @@ audio{
   position: absolute;
   width: 38%;
   height: 38%;
-  z-index: 5;
   opacity: 0;
+}
+
+.z-index-5{
+	z-index: 5;
 }
 
 .like-indicator-mobile:nth-of-type(1){
