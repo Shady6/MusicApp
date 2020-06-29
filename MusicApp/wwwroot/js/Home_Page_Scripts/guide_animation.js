@@ -5,7 +5,7 @@ const guideAnimationXOffsetFactor = 1 / 6;
 const guideAnimationYOffsetFactor = 1 / 10;
 const guideAnimationRotation = 14;
 const guideAnimationOpacity = 1;
-const guideSingleAnimationTime = 100; // 700
+const guideSingleAnimationTime = 400;
 
 let animatedElementSelector = "";
 

@@ -30,7 +30,7 @@ const xOffsetScreenWidthRatioToCreateNextCard = 1 / 3;
 
 const timeToGoOffScreen = 400;
 
-const timeToStartGuideAnimation = 10; // 1000
+const timeToStartGuideAnimation = 1000;
 
 let canStartToSwipeAgain = true;
 

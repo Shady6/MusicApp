@@ -88,6 +88,9 @@ const setTrackLinksOverlayMobile = () => {
   $(".overlay").append(
     createTrackLinksOverlay(`${track.Title} ${track.Artist.Name}`, track.Link)
   );
+
+  if ($(".hovereffect").is(":hover"))
+    $(".track-links").removeClass("disabled-link-mobile");
 };
 
 const setTrackAbout = () => {
