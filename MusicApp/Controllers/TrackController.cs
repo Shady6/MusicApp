@@ -24,12 +24,8 @@ namespace MusicApp.Controllers
 	    public async Task<IActionResult> Index()
 	    {
 		    User currentUser = await _userManager.GetUserAsync(User);
-		    List<Track> favoriteTracks = _db.Tracks.Include(t => t.Album)
-			    .Include(t => t.Artist)
-			    .Where(t => t.User == currentUser).ToList();
-		    ViewBag.FavoriteTracks = favoriteTracks;
 
-            return View();
+		    return View();
         }
     }
 }

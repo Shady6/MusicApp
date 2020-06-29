@@ -27,6 +27,7 @@ $(document).ready(() => {
 
 const wrapper = async () => {
   tracks = JSON.parse(await loadAllUserTracks());
+
   tracksCopy = [...tracks];
 
   vw = getViewportWidth();
@@ -39,10 +40,10 @@ const wrapper = async () => {
   setControlsListeners();
 };
 
-const goToPage = (pageNum) => {
+export const goToPage = (pageNum) => {
   if (
     pageNum === 0 ||
-    (pageNum >= 0 && pageNum <= Math.floor((tracks.length - 1) / tracksOnPage))
+    (pageNum >= 0 && pageNum <= ((tracks.length - 1) / tracksOnPage))
   ) {
     currentPage = pageNum;
     rerender();

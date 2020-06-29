@@ -2,6 +2,8 @@
 
   .image-card-wrapper{
     height: 42vh;
+    left: 0;
+    top: 0;
   }
 
   img{
@@ -19,4 +21,8 @@
 
   .no-tracks-added-info{
     font-size: 2rem;
+  }
+
+  .transition-all-ease-out{
+    transition: all .1s ease-out;
   }
