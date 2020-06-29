@@ -77,7 +77,7 @@ audio{
 }
 
 .ease-out-transition-all{
-	transition: all .4s ease-out;
+	transition: all .6s ease-out;
 }
 
 .ease-out-transition-all-long{

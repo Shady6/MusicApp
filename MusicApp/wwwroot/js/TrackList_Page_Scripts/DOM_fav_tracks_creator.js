@@ -35,9 +35,9 @@ export const createTrackAboutOverlay = (track) => {
 export const createTrackActionsOverlay = (track, parentDivId) => {
   return `
   <p class="track-actions disabled-link-mobile">
-  <i class="fa fa-play" track-src="${track.Preview}" aria-hidden="true"></i>
-  <i class="fa fa-pause" style="display:none;" aria-hidden="true"></i>
-  <i class="fa fa-repeat" aria-hidden="true"></i>
+  <i class="fa fa-play pr-1" track-src="${track.Preview}" aria-hidden="true"></i>
+  <i class="fa fa-pause pr-1" style="display:none;" aria-hidden="true"></i>
+  <i class="fa fa-repeat pr-5" aria-hidden="true"></i>
   <i parent-wrapper-id="${parentDivId}" track-title="${track.Title.replace(
     /"/g,
     "&quot;"

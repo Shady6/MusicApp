@@ -2,9 +2,9 @@ import {
   tracksOnPage,
   currentPage,
   getTracksLength,
-  goToPage
+  goToPage,
 } from "./fav_tracks_pagination.js";
-import { getViewportWidth} from "../utils/window_utils.js";
+import { getViewportWidth } from "../utils/window_utils.js";
 
 import { convertPixelUnitStringToNumber } from "../utils/css_utils.js";
 import { firstImage } from "../Home_Page_Scripts/tracks_loader.js";
@@ -19,7 +19,7 @@ let xCoords = [];
 let firstMiddleCard = null;
 
 const swipeTransitionTime = 300;
-const transitionClassName = "transition-all-ease-out"
+const transitionClassName = "transition-all-ease-out";
 
 $(document).ready(() => {
   setEventListeners();
@@ -27,8 +27,10 @@ $(document).ready(() => {
 
 const setEventListeners = () => {
   document.addEventListener("onFirstTracksRendered", () => {
-    if (!topCssValuesAndCardWidthSet) handleFirstTracksRendered();
-    if (getTracksLength() > tracksOnPage) setSwipeListeners();
+    if (getTracksLength() > tracksOnPage) {
+      if (!topCssValuesAndCardWidthSet) handleFirstTracksRendered();
+      setSwipeListeners();
+    }
   });
 };
 
