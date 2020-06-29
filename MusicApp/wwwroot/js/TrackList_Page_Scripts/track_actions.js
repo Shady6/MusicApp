@@ -3,42 +3,62 @@ import { convertToTrackDto } from "../track_data_processor.js";
 import { deleteTrackFromMemory } from "./fav_tracks_pagination.js";
 
 $(document).ready(() => {
+  if (window.location.href.slice(-5) === "Track") {
+    let audio = document.querySelector("audio");
+    setEventListeners(audio);
+  }
+});
 
-  let audio = document.querySelector("audio");
-
+const setEventListeners = (audio) => {
   $("#track-list-container").on("click", (e) => {
-    if ($(e.target).hasClass("fa-trash")) {
-      handleTrashButtonClick(e);
-    }
-  
-
-    if ($(e.target).parent().hasClass("track-actions")) {
-      const playBtn = $(e.target)
-        .parent()
-        .children()
-        .filter((i, trackAction) => $(trackAction).hasClass("fa-play"));
-      const pauseBtn = playBtn.next();
-      
-      if ($(e.target).hasClass("fa-play")) {
-        handlePlayButtonClick(audio, playBtn, pauseBtn);
-      }
-
-      if ($(e.target).hasClass("fa-pause")) {
-        handlePauseButtonClick(audio, playBtn, pauseBtn);
-      }
-
-      if ($(e.target).hasClass("fa-repeat")) {
-        handleRepeatButtonClick(audio, playBtn, pauseBtn);
-      }
-    }
+    setTrackActionsListener(e);
+    setAudioControlsOnCardListeners(e, audio);
   });
+  setAudioStoperClickListener(audio);
+  setAudioStoppedPlayingListener();
+};
 
+const setAudioStoperClickListener = (audio) => {
   $(".audio-stop-btn").on("click", () => {
     handleGlobalAudioStopBtn(audio);
   });
+};
 
+const setTrackActionsListener = (e) => {
+  if ($(e.target).hasClass("fa-trash")) {
+    handleTrashButtonClick(e);
+  }
+};
 
-});
+const setAudioControlsOnCardListeners = (e, audio) => {
+  if ($(e.target).parent().hasClass("track-actions")) {
+    const playBtn = $(e.target)
+      .parent()
+      .children()
+      .filter((i, trackAction) => $(trackAction).hasClass("fa-play"));
+    const pauseBtn = playBtn.next();
+
+    if ($(e.target).hasClass("fa-play")) {
+      handlePlayButtonClick(audio, playBtn, pauseBtn);
+    }
+
+    if ($(e.target).hasClass("fa-pause")) {
+      handlePauseButtonClick(audio, playBtn, pauseBtn);
+    }
+
+    if ($(e.target).hasClass("fa-repeat")) {
+      handleRepeatButtonClick(audio, playBtn, pauseBtn);
+    }
+  }
+};
+
+const setAudioStoppedPlayingListener = () => {
+  document.querySelector("audio").addEventListener("ended", (e) => {
+    $(".fa-play").show();
+    $(".fa-pause").hide();
+    $(".audio-stop-btn").attr("disabled", true);
+  });
+};
 
 const handleRepeatButtonClick = (audio, playBtn, pauseBtn) => {
   $(".audio-stop-btn").attr("disabled", false);
@@ -70,7 +90,7 @@ const handleGlobalAudioStopBtn = (audio) => {
     showAllPlayBtnsHidePauseBtns();
     $(".audio-stop-btn").attr("disabled", true);
   }
-}
+};
 
 const deleteTrack = (trackName, cardIdToRemove) => {
   console.log(trackName);
@@ -122,6 +142,3 @@ const playAudio = (audio, playBtn) => {
   if (audio.getAttribute("src") == playBtn.attr("track-src")) audio.play();
   else audio.setAttribute("src", playBtn.attr("track-src"));
 };
-
-
-
