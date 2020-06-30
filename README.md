@@ -22,13 +22,13 @@ All the songs which you'll encounter on the website are fetched from [Deezer API
 
 # Screenshots
 ### On desktop
-![alt text](https://drive.google.com/file/d/1b7e-bb9Tp-vGXL7WBRnil7-YVOl8gwCb/preview "Home page")
-![alt text](https://drive.google.com/file/d/1MSwDFjEAN3GUWGM2icG7Of2r_d9yJ12B/preview "Track list page")
+![Home page](https://drive.google.com/uc?export=view&id=1b7e-bb9Tp-vGXL7WBRnil7-YVOl8gwCb)
+![Track list page](https://drive.google.com/uc?export=view&id=1MSwDFjEAN3GUWGM2icG7Of2r_d9yJ12B)
 
 ### On mobile
-![alt text](https://drive.google.com/file/d/1jTMktYimyxyy_UPLWwZ6iTnkqZJyk7-n/preview "Home page, overlay on track")
-![alt text](https://drive.google.com/file/d/1W-wA9vzrihHKK3ciTB5MZ2s1wKN6QgSW/preview "Home page, like indicator")
-![alt text](https://drive.google.com/file/d/1KBjPpP0Agu2dR82HMaG8QH7y4XWzkNwf/preview "Track list page")
+![Home page, overlay on track](https://drive.google.com/uc?export=view&id=1jTMktYimyxyy_UPLWwZ6iTnkqZJyk7-n)
+![Home page, like indicator](https://drive.google.com/uc?export=view&id=1W-wA9vzrihHKK3ciTB5MZ2s1wKN6QgSW)
+![Track list page](https://drive.google.com/uc?export=view&id=1KBjPpP0Agu2dR82HMaG8QH7y4XWzkNwf)
 
 # How to run it?
 
