@@ -22,13 +22,13 @@ All the songs which you'll encounter on the website are fetched from [Deezer API
 
 # Screenshots
 ### On desktop
-![alt text](https://lh5.googleusercontent.com/mBrHXVdwpsj6VFkF0cXnM4cFzREzAI8_SapmhXlRPdNiAQk_sscyi7rkb190GPLmSjixp2QDBmTLRplUuQDY=w1960-h3478-rw "Home page")
-![alt text](https://lh6.googleusercontent.com/hl_afqyg78Alc4v0Zl9UI1KS-Y2a4RJMclisCNSRgZyUWKEvUF9UMnEHIe2EYJS8WZNyxGzWEMFgSyyCL-7I=w1920-h969-rw "Track list page")
+![alt text](https://drive.google.com/file/d/1b7e-bb9Tp-vGXL7WBRnil7-YVOl8gwCb/preview "Home page")
+![alt text](https://drive.google.com/file/d/1MSwDFjEAN3GUWGM2icG7Of2r_d9yJ12B/preview "Track list page")
 
 ### On mobile
-![alt text](https://lh5.googleusercontent.com/mf7CPPFiuMtRICH0IDIk40juwT8JALsrE0ynWlD-LCfX4aUzSBCfcHRqcalAMau3KpR10ydH_aUI2xn9rlSc=w1259-h969 "Home page, overlay on track")
-![alt text](https://lh3.googleusercontent.com/gqkt9F9p7oLy0SWEfv1qBmmxHXgBHIqGFuHNDnj9CZYG-KWkmL67uhfY0WdnkOo_YZ-225a2leTs8hVfIr7t=w1920-h969 "Home page, like indicator")
-![alt text](https://lh3.googleusercontent.com/kQ2kTe5MvZgBeHxL0I_DUyzkD0dmUGAQIQ5jTrH6hBMvTXOMrblgM9SV9Qd9jJOEkgXvZf5RAJ3VN2XjqbQv=w1259-h969 "Track list page")
+![alt text](https://drive.google.com/file/d/1jTMktYimyxyy_UPLWwZ6iTnkqZJyk7-n/preview "Home page, overlay on track")
+![alt text](https://drive.google.com/file/d/1W-wA9vzrihHKK3ciTB5MZ2s1wKN6QgSW/preview "Home page, like indicator")
+![alt text](https://drive.google.com/file/d/1KBjPpP0Agu2dR82HMaG8QH7y4XWzkNwf/preview "Track list page")
 
 # How to run it?
 
