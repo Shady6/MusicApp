@@ -41,7 +41,7 @@ const setTrackReleaseDate = () => {
 
 const setTrackDeezerRank = () => {
   let trackRank = "Unknown";
-  if (track.Rank && track.Rank > 10) trackRank = track.Rrank;
+  if (track.Rank && track.Rank > 10) trackRank = track.Rank;
   $(".trackDeezerRank").text(trackRank);
 };
 
