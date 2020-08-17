@@ -22,13 +22,13 @@ All the songs which you'll encounter on the website are fetched from [Deezer API
 
 # Screenshots
 ### On desktop
-![Home page](https://drive.google.com/uc?export=view&id=1b7e-bb9Tp-vGXL7WBRnil7-YVOl8gwCb)
-![Track list page](https://drive.google.com/uc?export=view&id=1MSwDFjEAN3GUWGM2icG7Of2r_d9yJ12B)
+![Home page](/Screenshots Showcase/pc_home.png?raw=true "Home page")
+![Track list page](/Screenshots Showcase/pc_tracklist.png?raw=true "Track list page")
 
 ### On mobile
-![Home page, overlay on track](https://drive.google.com/uc?export=view&id=1jTMktYimyxyy_UPLWwZ6iTnkqZJyk7-n)
-![Home page, like indicator](https://drive.google.com/uc?export=view&id=1W-wA9vzrihHKK3ciTB5MZ2s1wKN6QgSW)
-![Track list page](https://drive.google.com/uc?export=view&id=1KBjPpP0Agu2dR82HMaG8QH7y4XWzkNwf)
+![Home page, overlay on track](/Screenshots Showcase/mobile_home1.png?raw=true "Mobile home page with overlay on track")
+![Home page, like indicator](/Screenshots Showcase/mobile_home2.png?raw=true "Mobile home page while swiping track")
+![Track list page](/Screenshots Showcase/mobile_tracklist.png?raw=true "Mobile track list page")
 
 # How to run it?
 
