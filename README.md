@@ -43,5 +43,5 @@ In order to run the application you'll need to have the following installed
 2. Open the project in Visual Studio
 3. In appsettings.json change value of DefaultConnection to your connection string
 4. In Visual Studio open Package Manager Console (Tools -> NuGet Package Manager -> Package Manager Console)  
-type update-database and hit enter.
+type ```update-database``` and hit enter.
 5. Run the project (F5)
